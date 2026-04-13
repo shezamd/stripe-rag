@@ -161,6 +161,7 @@ Run the full evaluation suite over ground-truth questions. Produces:
 - Aggregate Precision@k, Recall@k, F1@k for configurable k values
 - Faithfulness, Answer Relevance, and Answer Correctness scores (LLM-judged)
 - Per-question deep-dive with retrieved chunks, generated answer, and ground truth comparison
+<img width="1236" height="1392" alt="image" src="https://github.com/user-attachments/assets/dc9e5bdc-b68a-4e43-a0a3-640865147aab" />
 
 ### Corpus
 Browse the knowledge base — source distribution, total chunk count, and a keyword-searchable chunk browser.
