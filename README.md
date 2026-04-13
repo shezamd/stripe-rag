@@ -164,9 +164,11 @@ Run the full evaluation suite over ground-truth questions. Produces:
 
 ### Corpus
 Browse the knowledge base — source distribution, total chunk count, and a keyword-searchable chunk browser.
+<img width="618" height="807" alt="Screenshot 2026-04-14 at 00 23 27" src="https://github.com/user-attachments/assets/338fcd2b-8866-43cc-a9a1-98db83908896" />
 
 ### Inspector
 Deep inspection of individual queries: assembled prompt (system + user), full chunk text with relevance thresholds, token usage, and diagnostics (score gaps, low-confidence warnings, multi-source detection).
+<img width="814" height="810" alt="Screenshot 2026-04-14 at 00 19 24" src="https://github.com/user-attachments/assets/04824582-939a-4539-939f-7318570de58e" />
 
 ---
 
