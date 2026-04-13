@@ -153,6 +153,8 @@ Opens at `http://localhost:3000`. The backend API runs on `http://localhost:8000
 
 ### Ask
 Interactive Q&A over the ingested documentation. Shows retrieved chunks with similarity scores, retrieval/generation latency, and real-time retrieval quality metrics (mean similarity, score spread, chunks above threshold).
+<img width="2174" height="1602" alt="image" src="https://github.com/user-attachments/assets/55405382-2bf4-409d-8645-4bcf885888db" />
+
 
 ### Evaluate
 Run the full evaluation suite over ground-truth questions. Produces:
