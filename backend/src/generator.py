@@ -67,7 +67,6 @@ def generate_answer(query: str, chunks: List[Dict]) -> Dict:
         model=MODEL,
         max_tokens=1024,
         system=system,
-        thinking={"type": "adaptive"},
         messages=[{"role": "user", "content": user}],
     )
 
