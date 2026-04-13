@@ -1,0 +1,142 @@
+[
+  {
+    "id": "q01",
+    "question": "How do I create a PaymentIntent in Stripe?",
+    "ground_truth": "Send a POST request to /v1/payment_intents with required parameters: amount (integer in smallest currency unit) and currency (3-letter ISO code). Optional: payment_method_types, customer, description, metadata, confirm.",
+    "relevant_keywords": ["PaymentIntent", "POST", "/v1/payment_intents", "amount", "currency"],
+    "category": "payment_intents"
+  },
+  {
+    "id": "q02",
+    "question": "What are the possible status values for a Stripe PaymentIntent?",
+    "ground_truth": "A PaymentIntent can have these statuses: requires_payment_method, requires_confirmation, requires_action, processing, requires_capture, canceled, succeeded.",
+    "relevant_keywords": ["status", "requires_payment_method", "requires_confirmation", "requires_action", "processing", "succeeded", "canceled"],
+    "category": "payment_intents"
+  },
+  {
+    "id": "q03",
+    "question": "How do I confirm a PaymentIntent in Stripe?",
+    "ground_truth": "Send a POST request to /v1/payment_intents/:id/confirm. You can pass payment_method, return_url, and other confirmation parameters. The PaymentIntent will attempt to initiate payment.",
+    "relevant_keywords": ["confirm", "/confirm", "payment_method", "return_url"],
+    "category": "payment_intents"
+  },
+  {
+    "id": "q04",
+    "question": "What does the capture_method parameter control in a PaymentIntent?",
+    "ground_truth": "capture_method controls when funds are captured from the customer's account. Values: 'automatic' (capture immediately on confirmation), 'automatic_async', or 'manual' (authorize now, capture separately later).",
+    "relevant_keywords": ["capture_method", "automatic", "manual", "capture"],
+    "category": "payment_intents"
+  },
+  {
+    "id": "q05",
+    "question": "How do I create a customer in Stripe?",
+    "ground_truth": "Send a POST request to /v1/customers. Key optional parameters: email, name, phone, address, description, metadata, payment_method. Returns a Customer object.",
+    "relevant_keywords": ["customer", "POST", "/v1/customers", "email", "name"],
+    "category": "customers"
+  },
+  {
+    "id": "q06",
+    "question": "How do I retrieve and list all customers in Stripe?",
+    "ground_truth": "Retrieve a single customer: GET /v1/customers/:id. List all customers: GET /v1/customers with optional parameters limit (1-100), starting_after, ending_before, email filter, and created date filter.",
+    "relevant_keywords": ["GET", "/v1/customers", "list", "limit", "starting_after"],
+    "category": "customers"
+  },
+  {
+    "id": "q07",
+    "question": "How do webhooks work in Stripe and what should my endpoint do?",
+    "ground_truth": "Stripe sends a POST request to your HTTPS endpoint URL when an event occurs. Your endpoint must respond with a 2xx HTTP status within 30 seconds. You should verify the Stripe-Signature header using your webhook signing secret and process events idempotently.",
+    "relevant_keywords": ["webhook", "POST", "HTTPS", "Stripe-Signature", "2xx", "30 seconds"],
+    "category": "webhooks"
+  },
+  {
+    "id": "q08",
+    "question": "How do I verify a Stripe webhook signature to confirm authenticity?",
+    "ground_truth": "Use stripe.Webhook.construct_event(payload, sig_header, secret) in Python (or stripe.webhooks.constructEvent in Node.js). Pass the raw request body, the Stripe-Signature header value, and your webhook signing secret (whsec_xxx).",
+    "relevant_keywords": ["construct_event", "Stripe-Signature", "webhook_secret", "whsec", "signature"],
+    "category": "webhooks"
+  },
+  {
+    "id": "q09",
+    "question": "How do I create a subscription in Stripe?",
+    "ground_truth": "Send a POST request to /v1/subscriptions with required parameters: customer (customer ID) and items (array containing price IDs). Optional: trial_period_days, cancel_at_period_end, metadata.",
+    "relevant_keywords": ["subscription", "POST", "/v1/subscriptions", "customer", "items", "price"],
+    "category": "subscriptions"
+  },
+  {
+    "id": "q10",
+    "question": "What are the different subscription status values in Stripe?",
+    "ground_truth": "Subscription statuses: active (good standing, renews), trialing (in trial period), incomplete (awaiting initial payment), incomplete_expired (payment failed within 23 hours), past_due (payment failed, retrying), canceled (canceled), unpaid (latest invoice unpaid), paused.",
+    "relevant_keywords": ["active", "trialing", "incomplete", "past_due", "canceled", "unpaid", "paused"],
+    "category": "subscriptions"
+  },
+  {
+    "id": "q11",
+    "question": "How do I cancel a subscription in Stripe?",
+    "ground_truth": "To cancel immediately: DELETE /v1/subscriptions/:id. To cancel at the end of the current billing period: POST /v1/subscriptions/:id with cancel_at_period_end=true.",
+    "relevant_keywords": ["cancel", "DELETE", "cancel_at_period_end", "subscription"],
+    "category": "subscriptions"
+  },
+  {
+    "id": "q12",
+    "question": "How does pagination work in the Stripe API?",
+    "ground_truth": "Stripe uses cursor-based pagination. Use limit (1-100, default 10) to set page size. Use starting_after with the last object's ID to get the next page. Use ending_before for the previous page. The response includes has_more (boolean) and a data array.",
+    "relevant_keywords": ["pagination", "limit", "starting_after", "ending_before", "has_more"],
+    "category": "pagination"
+  },
+  {
+    "id": "q13",
+    "question": "How do I authenticate Stripe API requests?",
+    "ground_truth": "Use HTTP Basic Auth with your secret API key as the username (no password needed), or pass it as an Authorization: Bearer header. Test keys start with sk_test_, live keys with sk_live_. All requests must use HTTPS.",
+    "relevant_keywords": ["authentication", "API key", "sk_test_", "sk_live_", "HTTPS", "Bearer"],
+    "category": "authentication"
+  },
+  {
+    "id": "q14",
+    "question": "What are the error types returned by the Stripe API?",
+    "ground_truth": "Stripe error types: api_error (server-side issues), card_error (card declined/invalid), idempotency_error (mismatched idempotency key reuse), invalid_request_error (bad parameters), authentication_error (invalid API key), rate_limit_error (too many requests).",
+    "relevant_keywords": ["api_error", "card_error", "invalid_request_error", "authentication_error", "rate_limit_error", "idempotency_error"],
+    "category": "errors"
+  },
+  {
+    "id": "q15",
+    "question": "What HTTP status codes does Stripe use and what do they mean?",
+    "ground_truth": "200 OK (success), 400 Bad Request (missing/invalid params), 401 Unauthorized (bad API key), 402 Payment Required (valid params but request failed), 403 Forbidden (no permission), 404 Not Found, 429 Too Many Requests (rate limited), 500/502/503/504 Server errors.",
+    "relevant_keywords": ["200", "400", "401", "402", "403", "404", "429", "500"],
+    "category": "errors"
+  },
+  {
+    "id": "q16",
+    "question": "How do idempotency keys work in Stripe?",
+    "ground_truth": "Add an Idempotency-Key header (e.g., a UUID) to POST requests. If the same key is used again within 24 hours, Stripe returns the original response instead of creating a duplicate. Use unique keys per logical operation. Best practice: use V4 UUIDs.",
+    "relevant_keywords": ["Idempotency-Key", "idempotency", "UUID", "retry", "header"],
+    "category": "idempotency"
+  },
+  {
+    "id": "q17",
+    "question": "How do I create a refund in Stripe?",
+    "ground_truth": "Send a POST request to /v1/refunds with either charge or payment_intent (required). Optional: amount (for partial refund in cents), reason (duplicate/fraudulent/requested_by_customer). A full refund is issued if amount is omitted.",
+    "relevant_keywords": ["refund", "POST", "/v1/refunds", "charge", "amount", "reason"],
+    "category": "refunds"
+  },
+  {
+    "id": "q18",
+    "question": "How do I create a product and a recurring price in Stripe?",
+    "ground_truth": "Create a product: POST /v1/products with name. Create a price: POST /v1/prices with currency, unit_amount (in cents), product ID, and recurring object containing interval (day/week/month/year) and interval_count.",
+    "relevant_keywords": ["product", "price", "POST", "/v1/products", "/v1/prices", "recurring", "interval"],
+    "category": "products_prices"
+  },
+  {
+    "id": "q19",
+    "question": "What is a Stripe event and what does the event object contain?",
+    "ground_truth": "An Event object is created when something notable happens (e.g., payment succeeds). It contains: id, type (e.g., payment_intent.succeeded), created (timestamp), data.object (the affected resource), livemode, pending_webhooks, and api_version.",
+    "relevant_keywords": ["event", "type", "data.object", "created", "livemode", "payment_intent.succeeded"],
+    "category": "events"
+  },
+  {
+    "id": "q20",
+    "question": "What are Stripe's API rate limits and how should I handle rate limit errors?",
+    "ground_truth": "Stripe allows 100 read and 100 write requests per second in both live and test mode. Exceeding this returns HTTP 429 with a rate_limit_error type. Handle by checking the Retry-After header and implementing exponential backoff with jitter.",
+    "relevant_keywords": ["rate limit", "429", "Retry-After", "exponential backoff", "100 requests"],
+    "category": "rate_limits"
+  }
+]

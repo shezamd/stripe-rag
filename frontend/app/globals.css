@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Hairline border utility — 0.5px via box-shadow so it doesn't affect layout */
+.border-hairline {
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+}
+
+/* Used for tab active state inside segmented control */
+.tab-active {
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
