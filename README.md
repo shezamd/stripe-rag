@@ -25,32 +25,32 @@ Most RAG tutorials stop at "retrieve chunks, call an LLM". This project goes fur
 ## Architecture
 
 ```
-┌────────────────���────────────────────────────────────┐
-│  INGESTION                                           │
+┌────────────────���──────────────────────────────────┐
+│  INGESTION                                          │
 │  Stripe Docs → chunk (800 chars, 150 overlap)       │
 │             → embed (all-MiniLM-L6-v2, 384-dim)     │
-│             → store (ChromaDB / HNSW cosine)         │
+│             → store (ChromaDB / HNSW cosine)        │
 └────────────────────┬────────────────────────────────┘
                      │
 ┌────────────────────▼────────────────────────────────┐
-│  RETRIEVAL                                           │
+│  RETRIEVAL                                          │
 │  Query → embed → cosine search → top-k chunks       │
 └────────────────────┬────────────────────────────────┘
                      │
 ┌────────────────────▼────────────────────────────────┐
-│  GENERATION                                          │
+│  GENERATION                                         │
 │  Chunks + query → Claude Haiku 4.5 → answer         │
-│  (adaptive thinking · cite sources · no halluc)      │
+│  (adaptive thinking · cite sources · no halluc)     │
 └────────────────────┬────────────────────────────────┘
                      │
 ┌────────────────────▼────────────────────────────────┐
-│  EVALUATION                                          │
+│  EVALUATION                                         │
 │  Precision@k  — relevant chunks in top-k / k        │
-│  Recall@k     — relevant chunks captured / total     │
-│  Faithfulness — is the answer grounded in context?   │
-│  Relevance    — does the answer address the query?   │
-│  Correctness  — does the answer match ground truth?  │
-│  (scored by Claude Opus 4.6 via structured outputs)  │
+│  Recall@k     — relevant chunks captured / total    │
+│  Faithfulness — is the answer grounded in context?  │
+│  Relevance    — does the answer address the query?  │
+│  Correctness  — does the answer match ground truth? │
+│  (scored by Claude Opus 4.6 via structured outputs) │
 └─────────────────────────────────────────────────────┘
 ```
 
